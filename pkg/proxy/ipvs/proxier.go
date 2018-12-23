@@ -979,7 +979,7 @@ func (proxier *Proxier) syncProxyRules() {
 					serv.Flags |= utilipvs.FlagPersistent
 					serv.Timeout = uint32(svcInfo.StickyMaxAgeSeconds)
 				}
-				if err := proxier.syncService(svcNameString, serv, true); err == nil {
+				if err := proxier.syncService(svcNameString, serv, false); err == nil {
 					// check if service need skip endpoints that not in same host as kube-proxy
 					onlyLocal := svcInfo.SessionAffinityType == api.ServiceAffinityClientIP && svcInfo.OnlyNodeLocalEndpoints
 					activeIPVSServices[serv.String()] = true
